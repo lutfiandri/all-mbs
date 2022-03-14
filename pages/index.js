@@ -1,5 +1,3 @@
-import Head from 'next/head';
-import Image from 'next/image';
 import { Container, Box, Center } from '@chakra-ui/react';
 import { AppBar1, AppBar2 } from '../components/AppBar';
 import { BottomNavBar } from '../components/BottomNavBar';
@@ -11,7 +9,7 @@ import parse from 'url-parse';
 function MyQR({ setData }) {
   // https://goqr.me/#
   return (
-    <Box mx={4} my={8} borderRadius={24} overflow="hidden">
+    <Box mx={4} my={4} borderRadius={24} overflow="hidden">
       <QrReader
         constraints={{ facingMode: 'environment' }}
         scanDelay={1000}
@@ -52,11 +50,11 @@ export default function Home() {
   return (
     <>
       <AppBar1 title="Scan QR Code" />
-      <Container>
+      <Container py={4}>
         <MyQR setData={setData}></MyQR>
         <Center>{data ? data : 'no result'}</Center>
       </Container>
-      <BottomNavBar activeRoute="/" />
+      <BottomNavBar />
     </>
   );
 }
