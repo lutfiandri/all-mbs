@@ -13,11 +13,12 @@ export function AppBar1({ title }) {
     <Box
       borderBottom="1px"
       borderColor="gray.200"
-      bg="white"
-      zIndex={1000}
       py={4}
-      pos="sticky"
-      top={0}
+      // bg="white"
+      // zIndex={1000}
+      // pos="sticky"
+      // top={0}
+      w="100%"
     >
       <Container>
         <Center>

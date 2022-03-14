@@ -6,24 +6,28 @@ import { HistoryItem } from '../../components/history/HistoryItem';
 export default function History() {
   return (
     <>
-      <AppBar1 title="History" />
-      <Container pt={4} pb={20}>
-        <Box mb={2}>
-          <Text fontWeight="bold">Senin, 24 Maret 2022</Text>
+      <VStack w="100%" h="100vh">
+        <AppBar1 title="History" />
+        <Box w="100%" flex={1} overflowY="auto">
+          <Container pt={4} pb={20}>
+            <Box mb={2}>
+              <Text fontWeight="bold">Senin, 24 Maret 2022</Text>
+            </Box>
+            <VStack>
+              <HistoryItem harvester="Lutfi Andriyanto" fruitsCount={100} />
+              <HistoryItem />
+              <HistoryItem />
+              <HistoryItem />
+              <HistoryItem />
+              <HistoryItem />
+              <HistoryItem />
+              <HistoryItem />
+              <HistoryItem />
+            </VStack>
+          </Container>
         </Box>
-        <VStack>
-          <HistoryItem harvester="Lutfi Andriyanto" fruitsCount={100} />
-          <HistoryItem />
-          <HistoryItem />
-          <HistoryItem />
-          <HistoryItem />
-          <HistoryItem />
-          <HistoryItem />
-          <HistoryItem />
-          <HistoryItem />
-        </VStack>
-      </Container>
-      <BottomNavBar />
+        <BottomNavBar />
+      </VStack>
     </>
   );
 }

@@ -1,4 +1,4 @@
-import { Container, Box, Center } from '@chakra-ui/react';
+import { Container, Box, Center, VStack } from '@chakra-ui/react';
 import { AppBar1, AppBar2 } from '../components/AppBar';
 import { BottomNavBar } from '../components/BottomNavBar';
 import React, { useState, useEffect } from 'react';
@@ -49,12 +49,16 @@ export default function Home() {
 
   return (
     <>
-      <AppBar1 title="Scan QR Code" />
-      <Container py={4}>
-        <MyQR setData={setData}></MyQR>
-        <Center>{data ? data : 'no result'}</Center>
-      </Container>
-      <BottomNavBar />
+      <VStack w="100%" h="100vh">
+        <AppBar1 title="Scan QR Code" />
+        <Box w="100%" flex={1} overflowY="auto">
+          <Container py={4}>
+            <MyQR setData={setData}></MyQR>
+            <Center>{data ? data : 'no result'}</Center>
+          </Container>
+        </Box>
+        <BottomNavBar />
+      </VStack>
     </>
   );
 }

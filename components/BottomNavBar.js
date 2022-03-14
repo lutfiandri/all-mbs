@@ -43,7 +43,7 @@ export function BottomNavBar() {
   ));
 
   return (
-    <Box pos="fixed" bottom={0} w="100%" bg="white" zIndex={1000}>
+    <Box w="100%" bg="gray.100">
       <HStack spacing="-1px">{Items}</HStack>
     </Box>
   );
