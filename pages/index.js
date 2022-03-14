@@ -49,7 +49,7 @@ export default function Home() {
 
   return (
     <>
-      <VStack w="100%" h="100vh">
+      <VStack w="100%" h="100vh" spacing={0}>
         <AppBar1 title="Scan QR Code" />
         <Box w="100%" flex={1} overflowY="auto">
           <Container py={4}>
