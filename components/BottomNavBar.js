@@ -31,7 +31,7 @@ export function BottomNavBar({ activeRoute }) {
       flex={1}
       py={2}
       // bg="cyan.400"
-      textColor={activeRoute === route.route ? 'cyan.900' : 'gray.500'}
+      textColor={activeRoute === route.route ? 'blue.900' : 'gray.500'}
     >
       <Icon as={route.icon} boxSize={5} />
       <Text fontSize="sm">{route.text}</Text>
