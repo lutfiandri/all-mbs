@@ -9,15 +9,24 @@ import {
   NumberDecrementStepper,
 } from '@chakra-ui/react';
 
-export function CustomTextInput({ name, data, setData, placeholder }) {
+export function CustomTextInput({
+  name,
+  data,
+  setData,
+  placeholder,
+  isRequired = false,
+  label = true,
+  type = 'text',
+}) {
   return (
-    <FormControl isRequired mb={4}>
-      <FormLabel htmlFor={name}>{placeholder}</FormLabel>
+    <FormControl isRequired={isRequired} mb={4}>
+      {label && <FormLabel htmlFor={name}>{placeholder}</FormLabel>}
       <Input
         id={name}
         placeholder={placeholder}
         value={data}
         onChange={(e) => setData(e.target.value)}
+        type={type}
       />
     </FormControl>
   );

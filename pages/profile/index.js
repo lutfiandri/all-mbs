@@ -1,8 +1,10 @@
 import { Container, Box, Center, VStack } from '@chakra-ui/react';
 import { AppBar1, AppBar2 } from '../../components/AppBar';
 import { BottomNavBar } from '../../components/BottomNavBar';
+import useActiveUser from '../../hooks/useActiveUser';
 
 export default function Profile() {
+  useActiveUser();
   return (
     <>
       <VStack w="100%" h="100vh" spacing={0}>

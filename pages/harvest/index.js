@@ -3,8 +3,16 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { AppBar2 } from '../../components/AppBar';
 import { CustomNumberInput, CustomTextInput } from '../../components/Input';
+import useActiveUser from '../../hooks/useActiveUser';
+import { useSelector } from 'react-redux';
+import { addDoc, collection } from 'firebase/firestore';
+import { db } from '../../utils/firebase';
 
 export default function Harvest() {
+  useActiveUser();
+
+  const krani_uid = useSelector((state) => state.user.uid);
+
   const router = useRouter();
   const toast = useToast();
 
@@ -18,8 +26,9 @@ export default function Harvest() {
   const [busuk, setBusuk] = useState(0);
   const [jumlah, setJumlah] = useState(0);
   const [brondolan, setBrondolan] = useState(0);
+  const [loading, setLoading] = useState(false);
 
-  const submitHandler = () => {
+  const submitHandler = async () => {
     if (nama === '' || absen === '' || divisi === '') {
       toast({
         title: 'Gagal',
@@ -42,10 +51,36 @@ export default function Harvest() {
       busuk,
       jumlah,
       brondolan,
+      krani_uid,
     };
-    console.log(data);
-  };
 
+    setLoading(true);
+    try {
+      await addDoc(collection(db, 'harvests'), data);
+      setTimeout(() => {
+        setLoading(false);
+        router.replace('/');
+      }, 2000);
+      toast({
+        title: 'Input Berhasil',
+        description: 'Data telah disimpan',
+        status: 'success',
+        duration: 2000,
+        isClosable: false,
+      });
+    } catch (e) {
+      console.error('Error adding document: ', e);
+      toast({
+        title: 'Input Gagal',
+        description: 'Coba kembali',
+        status: 'error',
+        duration: 2000,
+        isClosable: true,
+      });
+
+      setLoading(false);
+    }
+  };
   return (
     <>
       <AppBar2
@@ -115,7 +150,12 @@ export default function Harvest() {
           setData={setBrondolan}
           placeholder="Kg Brondolan"
         />
-        <Button colorScheme="blue" w="100%" onClick={submitHandler}>
+        <Button
+          colorScheme="blue"
+          w="100%"
+          onClick={submitHandler}
+          isDisabled={loading}
+        >
           Submit
         </Button>
       </Container>

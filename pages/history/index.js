@@ -2,8 +2,10 @@ import { Container, Box, Center, VStack, Text } from '@chakra-ui/react';
 import { AppBar1, AppBar2 } from '../../components/AppBar';
 import { BottomNavBar } from '../../components/BottomNavBar';
 import { HistoryItem } from '../../components/history/HistoryItem';
+import useActiveUser from '../../hooks/useActiveUser';
 
 export default function History() {
+  useActiveUser();
   return (
     <>
       <VStack w="100%" h="100vh" spacing={0}>
