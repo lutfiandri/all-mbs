@@ -8,7 +8,6 @@ import {
 
 export function BottomNavBar() {
   const router = useRouter();
-  console.log(router);
 
   const routes = [
     {
@@ -28,6 +27,11 @@ export function BottomNavBar() {
     },
   ];
 
+  const clickHandler = (routeText) => {
+    if (routeText === router.pathname) return;
+    router.replace(routeText);
+  };
+
   const Items = routes.map((route) => (
     <Center
       key={route.route}
@@ -35,7 +39,7 @@ export function BottomNavBar() {
       flex={1}
       py={2}
       textColor={router.pathname === route.route ? 'blue.900' : 'gray.500'}
-      onClick={() => router.replace(route.route)}
+      onClick={() => clickHandler(route.route)}
     >
       <Icon as={route.icon} boxSize={5} />
       <Text fontSize="sm">{route.text}</Text>

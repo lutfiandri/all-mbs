@@ -1,4 +1,4 @@
-import { Container, Box, Center, VStack } from '@chakra-ui/react';
+import { Container, Box, Center, VStack, Text, Spacer } from '@chakra-ui/react';
 import { AppBar1, AppBar2 } from '../components/AppBar';
 import { BottomNavBar } from '../components/BottomNavBar';
 import React, { useState, useEffect } from 'react';
@@ -12,7 +12,7 @@ function MyQR({ setData }) {
     <Box mx={4} my={4} borderRadius={24} overflow="hidden">
       <QrReader
         constraints={{ facingMode: 'environment' }}
-        scanDelay={1000}
+        scanDelay={500}
         onResult={(result, error) => {
           if (!!result) {
             setData(result?.text);
@@ -52,9 +52,11 @@ export default function Home() {
       <VStack w="100%" h="100vh" spacing={0}>
         <AppBar1 title="Scan QR Code" />
         <Box w="100%" flex={1} overflowY="auto">
-          <Container py={4}>
+          <Container py={4} mt={12}>
             <MyQR setData={setData}></MyQR>
-            <Center>{data ? data : 'no result'}</Center>
+            <Text color="gray.700" align="center" mx="auto">
+              {data ? 'forwarding...' : 'scanning...'}
+            </Text>
           </Container>
         </Box>
         <BottomNavBar />

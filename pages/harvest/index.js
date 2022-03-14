@@ -1,4 +1,4 @@
-import { Container, Button, useToast } from '@chakra-ui/react';
+import { Container, Box, Button, VStack, useToast } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { AppBar2 } from '../../components/AppBar';
@@ -52,6 +52,7 @@ export default function Harvest() {
       jumlah,
       brondolan,
       krani_uid,
+      created_at: new Date(),
     };
 
     setLoading(true);
@@ -83,82 +84,87 @@ export default function Harvest() {
   };
   return (
     <>
-      <AppBar2
-        title="Harvest"
-        onBack={() => {
-          router.back();
-        }}
-      />
-      <Container py={6}>
-        <CustomTextInput
-          name="nama"
-          data={nama}
-          setData={setNama}
-          placeholder="Nama Pemanen"
+      <VStack w="100%" h="100vh" spacing={0}>
+        <AppBar2
+          title="Harvest"
+          onBack={() => {
+            router.back();
+          }}
         />
-        <CustomTextInput
-          name="absen"
-          data={absen}
-          setData={setAbsen}
-          placeholder="No. Absen Pemanen"
-        />
-        <CustomTextInput
-          name="divisi"
-          data={divisi}
-          setData={setDivisi}
-          placeholder="Divisi"
-        />
-        <CustomNumberInput
-          name="matang"
-          data={matang}
-          setData={setMatang}
-          placeholder="Buah Matang"
-        />
-        <CustomNumberInput
-          name="mengkal"
-          data={mengkal}
-          setData={setMengkal}
-          placeholder="Buah Mengkal"
-        />
-        <CustomNumberInput
-          name="mentah"
-          data={mentah}
-          setData={setMentah}
-          placeholder="Buah Mentah"
-        />
-        <CustomNumberInput
-          name="abnormal"
-          data={abnormal}
-          setData={setAbnormal}
-          placeholder="Buah Abnormal"
-        />
-        <CustomNumberInput
-          name="busuk"
-          data={busuk}
-          setData={setBusuk}
-          placeholder="Buah Busuk"
-        />
-        <CustomNumberInput
-          name="jumlah"
-          data={jumlah}
-          setData={setJumlah}
-          placeholder="Jumlah Buah"
-        />
-        <CustomNumberInput
-          name="brondolan"
-          data={brondolan}
-          setData={setBrondolan}
-          placeholder="Kg Brondolan"
-        />
-        <Button
-          colorScheme="blue"
-          w="100%"
-          onClick={submitHandler}
-          isDisabled={loading}
-        >
-          Submit
-        </Button>
-      </Container>
+
+        <Box w="100%" flex={1} overflowY="auto">
+          <Container py={6} flex={1}>
+            <CustomTextInput
+              name="nama"
+              data={nama}
+              setData={setNama}
+              placeholder="Nama Pemanen"
+            />
+            <CustomTextInput
+              name="absen"
+              data={absen}
+              setData={setAbsen}
+              placeholder="No. Absen Pemanen"
+            />
+            <CustomTextInput
+              name="divisi"
+              data={divisi}
+              setData={setDivisi}
+              placeholder="Divisi"
+            />
+            <CustomNumberInput
+              name="matang"
+              data={matang}
+              setData={setMatang}
+              placeholder="Buah Matang"
+            />
+            <CustomNumberInput
+              name="mengkal"
+              data={mengkal}
+              setData={setMengkal}
+              placeholder="Buah Mengkal"
+            />
+            <CustomNumberInput
+              name="mentah"
+              data={mentah}
+              setData={setMentah}
+              placeholder="Buah Mentah"
+            />
+            <CustomNumberInput
+              name="abnormal"
+              data={abnormal}
+              setData={setAbnormal}
+              placeholder="Buah Abnormal"
+            />
+            <CustomNumberInput
+              name="busuk"
+              data={busuk}
+              setData={setBusuk}
+              placeholder="Buah Busuk"
+            />
+            <CustomNumberInput
+              name="jumlah"
+              data={jumlah}
+              setData={setJumlah}
+              placeholder="Jumlah Buah"
+            />
+            <CustomNumberInput
+              name="brondolan"
+              data={brondolan}
+              setData={setBrondolan}
+              placeholder="Kg Brondolan"
+            />
+            <Button
+              colorScheme="blue"
+              w="100%"
+              onClick={submitHandler}
+              isDisabled={loading}
+            >
+              Submit
+            </Button>
+          </Container>
+        </Box>
+      </VStack>
     </>
   );
 }

@@ -10,16 +10,7 @@ import { HiArrowLeft } from 'react-icons/hi';
 
 export function AppBar1({ title }) {
   return (
-    <Box
-      borderBottom="1px"
-      borderColor="gray.200"
-      py={4}
-      // bg="white"
-      // zIndex={1000}
-      // pos="sticky"
-      // top={0}
-      w="100%"
-    >
+    <Box borderBottom="1px" borderColor="gray.200" py={4} w="100%">
       <Container>
         <Center>
           <Heading as="h1" size="md" isTruncated>
@@ -33,15 +24,7 @@ export function AppBar1({ title }) {
 
 export function AppBar2({ title, onBack }) {
   return (
-    <Box
-      borderBottom="1px"
-      borderColor="gray.200"
-      bg="white"
-      zIndex={1000}
-      py={4}
-      pos="sticky"
-      top={0}
-    >
+    <Box borderBottom="1px" borderColor="gray.200" py={4} w="100%">
       <Container>
         <HStack>
           <Icon as={HiArrowLeft} onClick={onBack} />
