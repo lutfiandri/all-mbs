@@ -13,7 +13,7 @@ export function AppBar1({ title }) {
     <Box borderBottom="1px" borderColor="gray.200" py={4} w="100%">
       <Container>
         <Center>
-          <Heading as="h1" size="md" isTruncated>
+          <Heading as="h1" size="md" isTruncated fontWeight="medium">
             {title}
           </Heading>
         </Center>
@@ -28,7 +28,7 @@ export function AppBar2({ title, onBack }) {
       <Container>
         <HStack>
           <Icon as={HiArrowLeft} onClick={onBack} />
-          <Heading as="h1" size="md" isTruncated>
+          <Heading as="h1" size="md" isTruncated fontWeight="medium">
             {title}
           </Heading>
         </HStack>
