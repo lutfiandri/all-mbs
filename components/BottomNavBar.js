@@ -5,8 +5,11 @@ import {
   HiOutlineDocumentText,
   HiOutlineUser,
 } from 'react-icons/hi';
+import { useMediaQuery } from '@chakra-ui/react';
 
 export function BottomNavBar() {
+  const [isMobile] = useMediaQuery('(max-width: 800px)');
+
   const router = useRouter();
 
   const routes = [
@@ -40,6 +43,11 @@ export function BottomNavBar() {
       py={2}
       textColor={router.pathname === route.route ? 'blue.900' : 'gray.500'}
       onClick={() => clickHandler(route.route)}
+      cursor="pointer"
+      transition={isMobile ? '' : 'background 150ms'}
+      _hover={{
+        bg: isMobile ? '' : 'blue.100',
+      }}
     >
       <Icon as={route.icon} boxSize={5} />
       <Text fontSize="sm">{route.text}</Text>
