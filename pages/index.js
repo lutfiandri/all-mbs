@@ -1,61 +1,49 @@
-import { Container, Box, Center, VStack, Text, Spacer } from '@chakra-ui/react';
-import { AppBar1, AppBar2 } from '../components/AppBar';
+import { Container, Box, VStack, Text, useToast } from '@chakra-ui/react';
+import { AppBar1 } from '../components/AppBar';
 import { BottomNavBar } from '../components/BottomNavBar';
 import React, { useState, useEffect } from 'react';
-import { QrReader } from 'react-qr-reader';
 import { useRouter } from 'next/router';
 import parse from 'url-parse';
-
-function MyQR({ setData }) {
-  // https://goqr.me/#
-  return (
-    <Box mx={4} my={4} borderRadius={24} overflow="hidden">
-      <QrReader
-        constraints={{ facingMode: 'environment' }}
-        scanDelay={500}
-        onResult={(result, error) => {
-          if (!!result) {
-            setData(result?.text);
-          }
-        }}
-        style={{ width: '100%' }}
-        videoContainerStyle={{
-          width: '100%',
-          margin: '0 auto',
-          transform: 'rotateY(180deg)',
-        }}
-        videoStyle={{
-          height: '100%',
-          width: '100%',
-          objectFit: 'cover',
-        }}
-      />
-    </Box>
-  );
-}
+import { QRCodeReader } from '../components/qr/QRCodeReader';
 
 export default function Home() {
   const [data, setData] = useState('');
   const router = useRouter();
+  const toast = useToast();
 
   useEffect(() => {
     if (data === '') return;
     const parsed = parse(data);
-    console.log(data);
+
+    console.log(parsed);
+
+    if (parsed.protocol !== 'allmbs:' || parsed.hostname !== 'harvest') {
+      console.log(parsed.protocol, parsed.hostname);
+      setData('');
+      toast({
+        title: 'Gagal Scan',
+        description: 'Format data QR Code tidak sesuai.',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
+
     console.log(parsed);
 
     router.push(`/harvest${parsed.query}`);
-  }, [data, router]);
+  }, [data, router, toast]);
 
   return (
     <>
       <VStack w="100%" h="100vh" spacing={0}>
         <AppBar1 title="Scan QR Code" />
         <Box w="100%" flex={1} overflowY="auto">
-          <Container py={4} mt={12}>
-            <MyQR setData={setData}></MyQR>
+          <Container py={4}>
+            <QRCodeReader setData={setData}></QRCodeReader>
             <Text color="gray.700" align="center" mx="auto">
-              {data ? 'forwarding...' : 'scanning...'}
+              Scanning...
             </Text>
           </Container>
         </Box>

@@ -25,12 +25,14 @@ export default function SignIn() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPass, setShowPass] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
   const toast = useToast();
   const router = useRouter();
 
   const signInHandler = async () => {
+    setLoading(true);
     const auth = getAuth();
 
     try {
@@ -47,6 +49,7 @@ export default function SignIn() {
       dispatch(setActiveUser(activeUser));
       router.replace('/');
     } catch (error) {
+      setLoading(false);
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log(errorCode, errorMessage);
@@ -107,7 +110,12 @@ export default function SignIn() {
             </Center>
           </InputRightElement>
         </InputGroup>
-        <Button colorScheme="blue" w="100%" onClick={signInHandler}>
+        <Button
+          colorScheme="blue"
+          w="100%"
+          onClick={signInHandler}
+          isDisabled={loading}
+        >
           Sign In
         </Button>
       </VStack>
