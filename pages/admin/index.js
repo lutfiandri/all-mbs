@@ -99,7 +99,6 @@ export default function AdminHome() {
             <CustomDatePicker date={startDate} setStartDate={setStartDate} />
             <Button
               colorScheme="blue"
-              size="sm"
               leftIcon={<HiOutlineDownload />}
               onClick={downloadCsvHandler}
             >
