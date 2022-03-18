@@ -20,16 +20,17 @@ import {
 } from 'firebase/firestore';
 import { db } from '../../utils/firebase';
 import { convertArrayToCSV } from 'convert-array-to-csv';
+import { CustomDatePicker } from '../../components/CustomDatePicker';
 
 export default function AdminHome() {
   const [harvests, setHarvests] = useState([]);
+  const [startDate, setStartDate] = useState(new Date());
 
   useEffect(() => {
-    const now = new Date();
-    now.setHours(0, 0, 0);
-    const midnight = new Date(now);
-    now.setHours(23, 59, 59);
-    const nextMidnight = new Date(now);
+    startDate.setHours(0, 0, 0);
+    const midnight = new Date(startDate);
+    startDate.setHours(23, 59, 59);
+    const nextMidnight = new Date(startDate);
 
     const q = query(
       collection(db, 'harvests'),
@@ -45,18 +46,16 @@ export default function AdminHome() {
         data.id = doc.id;
         collectionData.push(data);
       });
-      console.log(collectionData);
       setHarvests(collectionData);
     });
 
     return unsubscribe;
-  }, []);
+  }, [startDate]);
 
   const downloadCsvHandler = () => {
+    const now = new Date();
+    const date = new Intl.DateTimeFormat('id-ID').format(now);
     const data = harvests.map((harvest, index) => {
-      const result = harvest;
-      const now = new Date();
-      const date = new Intl.DateTimeFormat('id-ID').format(now);
       return {
         no: index + 1,
         nama: harvest.nama,
@@ -76,7 +75,7 @@ export default function AdminHome() {
     const encodedUri = encodeURI(csvData);
     const link = document.createElement('a');
     link.setAttribute('href', encodedUri);
-    link.setAttribute('download', 'my_data.csv');
+    link.setAttribute('download', 'allmbs-' + date);
     document.body.appendChild(link);
     link.click();
   };
@@ -97,9 +96,7 @@ export default function AdminHome() {
             Dashboard
           </Heading>
           <HStack>
-            <Box py={2} px={4} bg="gray.400" w="fit-content">
-              Kamis, 17 Maret 2002 ⬇️
-            </Box>
+            <CustomDatePicker date={startDate} setStartDate={setStartDate} />
             <Button
               colorScheme="blue"
               size="sm"
