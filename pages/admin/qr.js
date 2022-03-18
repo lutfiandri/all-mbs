@@ -14,7 +14,7 @@ import {
 } from '@chakra-ui/react';
 import { SideNavBar } from '../../components/admin/side/SideNavBar';
 import QRCode from 'qrcode.react';
-import { HiOutlineDownload, HiOutlineLightningBolt } from 'react-icons/hi';
+import { HiOutlineDownload } from 'react-icons/hi';
 import { toPng } from 'html-to-image';
 import { useState } from 'react';
 
@@ -61,9 +61,6 @@ export default function AdminQr() {
             </FormControl>
           </HStack>
 
-          {/* <Heading as="h2" fontSize="xl" pt={4}>
-            Hasil
-          </Heading> */}
           <Box>
             <HStack
               bg="white"
