@@ -132,3 +132,15 @@
 .react-datepicker__close-icon::after:hover {
   color: hsl(0, 0%, 70%);
 }
+
+.react-datepicker__day--outside-month {
+  color: #969696 !important;
+}
+
+.react-datepicker__day--today {
+  background: #c7c7c7 !important;
+}
+
+.react-datepicker__day--selected {
+  background: #1648c3 !important;
+}

@@ -8,7 +8,6 @@ import {
   Button,
   Spacer,
   Flex,
-  toast,
   useToast,
 } from '@chakra-ui/react';
 import { AppBar1, AppBar2 } from '../../components/AppBar';
@@ -73,7 +72,6 @@ export default function Profile() {
         <Box w="100%" flex={1} overflowY="auto">
           <Container py={4} h="100%">
             <Flex flexDirection="column" h="100%">
-              <TitleDesc title="Nama Krani" desc="Lutfi Krani" />
               <TitleDesc title="Nama Krani" desc="Lutfi Krani" />
               <Spacer />
               <HStack w="100%">

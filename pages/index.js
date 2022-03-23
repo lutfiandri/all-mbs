@@ -5,8 +5,10 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import parse from 'url-parse';
 import { QRCodeReader } from '../components/qr/QRCodeReader';
+import useActiveUser from '../hooks/useActiveUser';
 
 export default function Home() {
+  useActiveUser();
   const [data, setData] = useState('');
   const router = useRouter();
   const toast = useToast();

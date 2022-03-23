@@ -6,14 +6,22 @@ import {
   HStack,
   Spacer,
   Text,
+  useToast,
 } from '@chakra-ui/react';
 import Image from 'next/image';
 import { NavItem } from './NavItem';
-
 import { HiQrcode, HiHome, HiUserAdd, HiLogout } from 'react-icons/hi';
 import { useRouter } from 'next/router';
+import { getAuth, signOut } from 'firebase/auth';
+import { useDispatch } from 'react-redux';
+import { setUserInactive } from '../../../redux/slices/user';
+import { useState } from 'react';
 
 export function SideNavBar() {
+  const toast = useToast();
+  const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+
   const router = useRouter();
   const routes = [
     {
@@ -33,6 +41,26 @@ export function SideNavBar() {
     },
   ];
 
+  const signOutHandler = () => {
+    setLoading(true);
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        dispatch(setUserInactive());
+      })
+      .catch((error) => {
+        console.log(error);
+        setLoading(false);
+        toast({
+          title: 'Gagal Sign Out.',
+          description: 'Coba ulangi sign out beberapa saat lagi.',
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+        });
+      });
+  };
+
   return (
     <Container
       bg="white"
@@ -45,6 +73,7 @@ export function SideNavBar() {
       left={0}
       top={0}
       bottom={0}
+      zIndex={1000}
     >
       <Flex flexDirection="column" h="100%">
         <Box w="100%" py={4} pb={6}>
@@ -81,7 +110,7 @@ export function SideNavBar() {
         })}
 
         <Spacer flex={1} />
-        <NavItem text="Sign Out" icon={HiLogout} />
+        <NavItem text="Sign Out" icon={HiLogout} onClick={signOutHandler} />
       </Flex>
     </Container>
   );

@@ -20,6 +20,7 @@ import { useDispatch } from 'react-redux';
 import { setActiveUser } from '../../redux/slices/user';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import { useRouter } from 'next/router';
+import { getUserByUid } from '../../utils/users';
 
 export default function SignIn() {
   const [email, setEmail] = useState('');
@@ -42,12 +43,19 @@ export default function SignIn() {
         password
       );
       const user = await userCredential.user;
+      const userData = await getUserByUid(user.uid);
       const activeUser = {
         email: user.email,
         uid: user.uid,
+        role: userData.role,
+        name: userData.name,
       };
       dispatch(setActiveUser(activeUser));
-      router.replace('/');
+      if (activeUser.role === 'admin') {
+        router.replace('/admin');
+      } else if (activeUser.role === 'krani') {
+        router.replace('/');
+      }
     } catch (error) {
       setLoading(false);
       const errorCode = error.code;

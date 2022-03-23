@@ -14,11 +14,11 @@ export function CustomDatePicker({ date, setStartDate }) {
   };
 
   return (
-    <Box w={60}>
+    <Box w={60} bg="white">
       <FormControl>
         <DatePicker
           locale="id"
-          selectedDate={date}
+          selected={date}
           onChange={(newDate) => setStartDate(newDate)}
           value={dateToString(date)}
         />

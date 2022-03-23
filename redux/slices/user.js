@@ -10,9 +10,10 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     setActiveUser: (state, action) => {
-      const { email, uid } = action.payload;
+      const { email, uid, name } = action.payload;
       state.email = email;
       state.uid = uid;
+      state.name = name;
     },
     setUserInactive: (state) => {
       state.email = null;

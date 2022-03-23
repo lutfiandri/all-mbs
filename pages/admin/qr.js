@@ -80,16 +80,18 @@ export default function AdminQr() {
                   <Text w={14} fontSize="lg">
                     Nama
                   </Text>
+                  <Text w={1}>:</Text>
                   <Text fontSize="lg" flex={1}>
-                    : {nama}
+                    {nama}
                   </Text>
                 </HStack>
                 <HStack w="100%">
                   <Text w={14} fontSize="lg">
                     No
                   </Text>
+                  <Text w={1}>:</Text>
                   <Text fontSize="lg" flex={1}>
-                    : {absen}
+                    {absen}
                   </Text>
                 </HStack>
               </Box>
@@ -99,7 +101,7 @@ export default function AdminQr() {
           <Button
             colorScheme="blue"
             w="min-content"
-            size="sm"
+            // size="sm"
             leftIcon={<HiOutlineDownload />}
             onClick={downloadHandler}
           >

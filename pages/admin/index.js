@@ -21,8 +21,11 @@ import {
 import { db } from '../../utils/firebase';
 import { convertArrayToCSV } from 'convert-array-to-csv';
 import { CustomDatePicker } from '../../components/CustomDatePicker';
+import useActiveUser from '../../hooks/useActiveUser';
 
 export default function AdminHome() {
+  // useActiveUser('admin');
+
   const [harvests, setHarvests] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
 

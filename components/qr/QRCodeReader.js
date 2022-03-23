@@ -19,7 +19,7 @@ export function QRCodeReader({ setData }) {
         videoContainerStyle={{
           width: '100%',
           margin: '0 auto',
-          transform: isMobile ? '' : 'rotateY(180deg)',
+          // transform: isMobile ? '' : 'rotateY(180deg)',
         }}
         videoStyle={{
           height: '100%',
