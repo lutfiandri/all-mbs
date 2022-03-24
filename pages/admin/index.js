@@ -47,6 +47,8 @@ export default function AdminHome() {
       querySnapshot.forEach((doc) => {
         const data = doc.data();
         data.id = doc.id;
+        data.jumlah =
+          data.matang + data.mengkal + data.mentah + data.abnormal + data.busuk;
         collectionData.push(data);
       });
       setHarvests(collectionData);

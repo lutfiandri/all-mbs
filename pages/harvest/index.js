@@ -7,6 +7,7 @@ import useActiveUser from '../../hooks/useActiveUser';
 import { useSelector } from 'react-redux';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../../utils/firebase';
+import { addHarvest } from '../../utils/harvest/addHarvest';
 
 export default function Harvest() {
   useActiveUser();
@@ -24,7 +25,6 @@ export default function Harvest() {
   const [mentah, setMentah] = useState(0);
   const [abnormal, setAbnormal] = useState(0);
   const [busuk, setBusuk] = useState(0);
-  const [jumlah, setJumlah] = useState(0);
   const [brondolan, setBrondolan] = useState(0);
   const [loading, setLoading] = useState(false);
 
@@ -48,15 +48,13 @@ export default function Harvest() {
       mentah: Number(mentah),
       abnormal: Number(abnormal),
       busuk: Number(busuk),
-      jumlah: Number(jumlah),
       brondolan: Number(brondolan),
       krani_uid,
-      created_at: new Date(),
     };
 
     setLoading(true);
     try {
-      await addDoc(collection(db, 'harvests'), data);
+      await addHarvest(data);
       setTimeout(() => {
         setLoading(false);
         router.replace('/');
@@ -140,12 +138,6 @@ export default function Harvest() {
               data={busuk}
               setData={setBusuk}
               placeholder="Buah Busuk"
-            />
-            <CustomNumberInput
-              name="jumlah"
-              data={jumlah}
-              setData={setJumlah}
-              placeholder="Jumlah Buah"
             />
             <CustomNumberInput
               name="brondolan"

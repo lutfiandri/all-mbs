@@ -48,7 +48,12 @@ export default function History() {
         collectionData.push({
           id: doc.id,
           nama: data.nama,
-          jumlah: data.jumlah,
+          jumlah:
+            data.matang +
+            data.mengkal +
+            data.mentah +
+            data.abnormal +
+            data.busuk,
         });
       });
       setHarvests(collectionData);
