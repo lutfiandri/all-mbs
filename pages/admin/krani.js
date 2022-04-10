@@ -21,6 +21,7 @@ import { generate } from 'generate-password';
 import { KraniListTable } from '../../components/admin/KraniListTable';
 import { collection, query, where, onSnapshot } from 'firebase/firestore';
 import { db } from '../../utils/firebase';
+import axios from 'axios';
 
 export default function AdminKrani() {
   const [name, setName] = useState('');
@@ -79,7 +80,18 @@ export default function AdminKrani() {
       if (email === '' || password === '')
         throw new Error('validation/empty-email-password');
 
-      const user = await createKrani(email + '@allmbs.id', password, name);
+      const user = await axios({
+        method: 'POST',
+        url: '/api/kranis',
+        data: {
+          name,
+          email: email + '@allmbs.id',
+          password,
+        },
+      });
+      console.log(user);
+
+      // const user = await createKrani(email + '@allmbs.id', password, name);
       toast({
         title: 'Berhasil',
         description: 'Akun krani berhasil dibuat',
@@ -89,7 +101,8 @@ export default function AdminKrani() {
         position: 'bottom-right',
       });
     } catch (error) {
-      let desc = 'Terjadi kesalahan.';
+      console.log(error);
+      let desc = error.message || 'Terjadi Kesalahan';
       if (error.message === 'validation/empty-email-password') {
         desc = 'Mohon isi email dan password.';
       } else if (error.code === 'auth/email-already-in-use') {

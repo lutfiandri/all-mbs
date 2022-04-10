@@ -24,7 +24,7 @@ import { CustomDatePicker } from '../../components/CustomDatePicker';
 import useActiveUser from '../../hooks/useActiveUser';
 
 export default function AdminHome() {
-  // useActiveUser('admin');
+  useActiveUser('admin');
 
   const [harvests, setHarvests] = useState([]);
   const [startDate, setStartDate] = useState(new Date());

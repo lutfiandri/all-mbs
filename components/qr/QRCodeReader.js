@@ -9,7 +9,7 @@ export function QRCodeReader({ setData }) {
     <Box mx={4} my={4} borderRadius={24} overflow="hidden">
       <QrReader
         constraints={{ facingMode: 'environment' }}
-        scanDelay={500}
+        scanDelay={100}
         onResult={(result, error) => {
           if (!!result) {
             setData(result?.text);
@@ -19,7 +19,7 @@ export function QRCodeReader({ setData }) {
         videoContainerStyle={{
           width: '100%',
           margin: '0 auto',
-          // transform: isMobile ? '' : 'rotateY(180deg)',
+          transform: isMobile ? '' : 'rotateY(180deg)',
         }}
         videoStyle={{
           height: '100%',
