@@ -43,12 +43,11 @@ export default function SignIn() {
         password
       );
       const user = await userCredential.user;
-      const userData = await getUserByUid(user.uid);
       const activeUser = {
         email: user.email,
         uid: user.uid,
-        role: userData.role,
-        name: userData.name,
+        name: user.displayName,
+        role: user.email.includes('admin') ? 'admin' : 'krani',
       };
       dispatch(setActiveUser(activeUser));
       if (activeUser.role === 'admin') {
