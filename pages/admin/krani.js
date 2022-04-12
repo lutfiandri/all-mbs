@@ -219,7 +219,7 @@ export default function AdminKrani() {
           <Heading as="h2" fontSize="xl" pt={4}>
             Daftar Akun Krani
           </Heading>
-          <KraniListTable kranis={kranis} />
+          <KraniListTable kranis={kranis} setKranis={setKranis} />
         </Stack>
       </Container>
     </HStack>

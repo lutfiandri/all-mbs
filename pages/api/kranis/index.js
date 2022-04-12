@@ -7,15 +7,13 @@ export default async function handler(req, res) {
 
       const listUsersResult = await auth.listUsers(1000);
       listUsersResult.users.forEach((userRecord) => {
-        // const user = userRecord.providerData.;
         const user = {
           email: userRecord.email || null,
           name: userRecord.displayName,
+          uid: userRecord.uid,
         };
         data.push(user);
       });
-
-      // console.log(data[0]);
 
       const kranis = data.filter((d) => !d.email.includes('admin'));
 
@@ -30,13 +28,11 @@ export default async function handler(req, res) {
   } else if (req.method === 'POST') {
     const { name, email, password } = req.body;
     try {
-      console.log(1);
       const userRecord = await auth.createUser({
         email: email,
         password: password,
         displayName: name,
       });
-      console.log(2);
       res.json({ status: 'success', userRecord });
     } catch (error) {
       console.log(error);
