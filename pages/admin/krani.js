@@ -39,19 +39,11 @@ export default function AdminKrani() {
   }, []);
 
   useEffect(() => {
-    const q = query(collection(db, 'users'), where('role', '==', 'krani'));
-    const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      const kraniTemps = [];
-      querySnapshot.forEach((doc) => {
-        const data = doc.data();
-        data.id = doc.id;
-        kraniTemps.push(data);
-      });
-      console.log(kraniTemps);
-      setKranis(kraniTemps);
-    });
-
-    return unsubscribe;
+    try {
+      getAllKraniHandler();
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
 
   useEffect(() => {
@@ -118,6 +110,23 @@ export default function AdminKrani() {
       });
     } finally {
       setLoading(false);
+    }
+  };
+
+  const getAllKraniHandler = async () => {
+    try {
+      const users = await axios({
+        method: 'GET',
+        url: '/api/kranis',
+      });
+      console.log(users);
+      if (!users.data.status === 'success') {
+        console.log(users);
+        throw new Error();
+      }
+      setKranis(users.data.data);
+    } catch (error) {
+      console.log(error);
     }
   };
 
