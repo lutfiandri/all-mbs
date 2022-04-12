@@ -46,10 +46,6 @@ export default function AdminKrani() {
     }
   }, []);
 
-  useEffect(() => {
-    console.log('kranis', kranis);
-  }, [kranis]);
-
   const emailRegexValidator = (username) => {
     const validRegex = /^[a-zA-Z0-9.#*+_~-]/;
     if (username.match(validRegex)) {
@@ -81,9 +77,8 @@ export default function AdminKrani() {
           password,
         },
       });
-      console.log(user);
+      getAllKraniHandler();
 
-      // const user = await createKrani(email + '@allmbs.id', password, name);
       toast({
         title: 'Berhasil',
         description: 'Akun krani berhasil dibuat',
