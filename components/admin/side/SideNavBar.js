@@ -78,9 +78,9 @@ export function SideNavBar() {
       <Flex flexDirection="column" h="100%">
         <Box w="100%" py={4} pb={6}>
           <HStack w="100%">
-            <Box w={8} h={8} bg="blue" borderRadius={4} p={2}>
+            <Box w={16} h={16} borderRadius={4} p={2}>
               <Image
-                src="/vercel.svg"
+                src="/allmbs.png"
                 alt="logo"
                 width={40}
                 height={40}

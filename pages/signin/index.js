@@ -73,9 +73,9 @@ export default function SignIn() {
   return (
     <Container h="100vh">
       <VStack h="100%" justifyContent="center">
-        <Box w={40} h={40} bg="blue.100" p={4} borderRadius={16} mb={8}>
+        <Box w={40} h={40} p={4} borderRadius={16} mb={8}>
           <Image
-            src="/vercel.svg"
+            src="/allmbs.png"
             alt="logo"
             layout="responsive"
             width={400}
