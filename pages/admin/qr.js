@@ -17,8 +17,11 @@ import QRCode from 'qrcode.react';
 import { HiOutlineDownload } from 'react-icons/hi';
 import { toPng } from 'html-to-image';
 import { useState } from 'react';
+import useActiveUser from '../../hooks/useActiveUser';
 
 export default function AdminQr() {
+  useActiveUser('admin');
+
   const [nama, setNama] = useState('');
   const [absen, setAbsen] = useState('');
 

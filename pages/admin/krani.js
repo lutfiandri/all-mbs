@@ -16,14 +16,14 @@ import {
 } from '@chakra-ui/react';
 import { useEffect, useState } from 'react';
 import { SideNavBar } from '../../components/admin/side/SideNavBar';
-import { createKrani } from '../../utils/krani';
 import { generate } from 'generate-password';
 import { KraniListTable } from '../../components/admin/KraniListTable';
-import { collection, query, where, onSnapshot } from 'firebase/firestore';
-import { db } from '../../utils/firebase';
 import axios from 'axios';
+import useActiveUser from '../../hooks/useActiveUser';
 
 export default function AdminKrani() {
+  useActiveUser('admin');
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
