@@ -16,7 +16,7 @@ import useActiveUser from '../../hooks/useActiveUser';
 
 import { getAuth, signOut } from 'firebase/auth';
 import { setUserInactive } from '../../redux/slices/user';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 
@@ -39,6 +39,7 @@ function TitleDesc({ title, desc }) {
 
 export default function Profile() {
   useActiveUser();
+  const krani = useSelector((state) => state.user);
 
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
@@ -72,7 +73,7 @@ export default function Profile() {
         <Box w="100%" flex={1} overflowY="auto">
           <Container py={4} h="100%">
             <Flex flexDirection="column" h="100%">
-              <TitleDesc title="Nama Krani" desc="Lutfi Krani" />
+              <TitleDesc title="Nama Krani" desc={krani.name} />
               <Spacer />
               <HStack w="100%">
                 <Button
