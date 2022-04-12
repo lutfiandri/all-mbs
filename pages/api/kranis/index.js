@@ -4,12 +4,24 @@ export default async function handler(req, res) {
   if (req.method === 'GET') {
     try {
       const data = [];
-      const querySnapshot = await db.collection('users').get();
-      querySnapshot.forEach((doc) => {
-        data.push(doc.data());
+
+      const listUsersResult = await auth.listUsers(1000);
+      listUsersResult.users.forEach((userRecord) => {
+        // const user = userRecord.providerData.;
+        const user = {
+          email: userRecord.email || null,
+          name: userRecord.displayName,
+        };
+        data.push(user);
       });
-      return res.json({ status: 'success', data });
+
+      // console.log(data[0]);
+
+      const kranis = data.filter((d) => !d.email.includes('admin'));
+
+      return res.json({ status: 'success', data: kranis });
     } catch (error) {
+      console.log(error);
       return res.status(500).json({
         status: 'error',
         error,
@@ -21,9 +33,8 @@ export default async function handler(req, res) {
       console.log(1);
       const userRecord = await auth.createUser({
         email: email,
-        // emailVerified: false,
         password: password,
-        // displayName: name,
+        displayName: name,
       });
       console.log(2);
       res.json({ status: 'success', userRecord });
@@ -39,18 +50,26 @@ export default async function handler(req, res) {
   return res.status(405);
 }
 
-const addToFirestore = async (uid, email, name) => {
-  try {
-    await setDoc(doc(db, 'users', uid), {
-      email,
-      name,
-      role: 'krani',
-    });
-    return {
-      status: 'success',
-    };
-  } catch (error) {
-    console.log(error);
-    throw new Error('krani/add-to-firestore');
-  }
+const listAllUsers = (nextPageToken) => {
+  // List batch of users, 1000 at a time.
+  const data = [];
+  return new Promise((resolve, reject) => {
+    auth
+      .listUsers(1000, nextPageToken)
+      .then((listUsersResult) => {
+        listUsersResult.users.forEach((userRecord) => {
+          const user = userRecord.providerData;
+          data.push(user);
+          console.log('user', user.toJSON());
+        });
+        if (listUsersResult.pageToken) {
+          // List next batch of users.
+          listAllUsers(listUsersResult.pageToken);
+        }
+        resolve(user);
+      })
+      .catch((error) => {
+        reject(error);
+      });
+  });
 };
