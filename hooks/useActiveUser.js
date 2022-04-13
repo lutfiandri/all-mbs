@@ -14,14 +14,13 @@ export default function useActiveUser(role = 'krani') {
   useEffect(() => {
     onAuthStateChanged(auth, async (user) => {
       if (user) {
-        const userData = await getUserByUid(user.uid);
         const activeUser = {
           email: user.email,
           uid: user.uid,
-          role: userData.role,
-          name: userData.name,
+          name: user.displayName,
+          role: user.email.includes('admin') ? 'admin' : 'krani',
         };
-        console.log(activeUser);
+        // console.log(activeUser);
         if (activeUser.role !== role) {
           dispatch(setUserInactive());
           router.replace('/signin');
