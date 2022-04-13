@@ -25,11 +25,21 @@ export default function AdminQr() {
   const [nama, setNama] = useState('');
   const [absen, setAbsen] = useState('');
 
-  const downloadHandler = () => {
+  const downloadCardHandler = () => {
     const qrElement = document.getElementById('qrcode-generated');
     toPng(qrElement).then(function (dataUrl) {
       const link = document.createElement('a');
-      link.download = `allmbs-${absen}-${nama}.png`;
+      link.download = `allmbs-${absen}-${nama}-card.png`;
+      link.href = dataUrl;
+      link.click();
+    });
+  };
+
+  const downloadQRHandler = () => {
+    const qrElement = document.querySelector('#qrcode-generated canvas');
+    toPng(qrElement).then(function (dataUrl) {
+      const link = document.createElement('a');
+      link.download = `allmbs-${absen}-${nama}-qr.png`;
       link.href = dataUrl;
       link.click();
     });
@@ -101,15 +111,26 @@ export default function AdminQr() {
             </HStack>
           </Box>
 
-          <Button
-            colorScheme="blue"
-            w="min-content"
-            // size="sm"
-            leftIcon={<HiOutlineDownload />}
-            onClick={downloadHandler}
-          >
-            Download PNG
-          </Button>
+          <HStack>
+            <Button
+              colorScheme="blue"
+              w="min-content"
+              size="sm"
+              leftIcon={<HiOutlineDownload />}
+              onClick={downloadCardHandler}
+            >
+              Download Card
+            </Button>
+            <Button
+              colorScheme="blue"
+              w="min-content"
+              size="sm"
+              leftIcon={<HiOutlineDownload />}
+              onClick={downloadQRHandler}
+            >
+              Download QR
+            </Button>
+          </HStack>
         </Stack>
       </Container>
     </HStack>
