@@ -20,12 +20,10 @@ import { db } from '../firebase';
 export const addHarvest = async (harvest) => {
   try {
     const initialHarvest = await getHarvest(harvest);
-    console.log(initialHarvest);
+    // console.log(initialHarvest);
     if (initialHarvest === null) {
-      console.log(1);
       await createHarvest(harvest);
     } else {
-      console.log(2);
       await updateHarvest(harvest, initialHarvest);
     }
   } catch (error) {
@@ -35,11 +33,15 @@ export const addHarvest = async (harvest) => {
 
 const getHarvest = async (harvest) => {
   try {
+    const midnight = new Date();
+    midnight.setHours(0, 0, 0, 0);
+
     const q = query(
       collection(db, 'harvests'),
       where('nama', '==', harvest.nama),
       where('absen', '==', harvest.absen),
       where('divisi', '==', harvest.divisi),
+      where('created_at', '>=', midnight),
       limit(1)
     );
 
@@ -50,7 +52,7 @@ const getHarvest = async (harvest) => {
     let result = null;
     querySnapshot.forEach((doc) => {
       result = doc.data();
-      console.log(result);
+      // console.log(result);
       result.id = doc.id;
     });
     return result;

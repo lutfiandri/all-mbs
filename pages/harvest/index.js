@@ -13,7 +13,7 @@ import Head from 'next/head';
 export default function Harvest() {
   useActiveUser();
 
-  const krani_uid = useSelector((state) => state.user.uid);
+  const krani = useSelector((state) => state.user);
 
   const router = useRouter();
   const toast = useToast();
@@ -50,7 +50,8 @@ export default function Harvest() {
       abnormal: Number(abnormal),
       busuk: Number(busuk),
       brondolan: Number(brondolan),
-      krani_uid,
+      krani_uid: krani.uid,
+      nama_krani: krani.name,
     };
 
     setLoading(true);

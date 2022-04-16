@@ -51,6 +51,7 @@ export default function AdminHome() {
         data.jumlah =
           data.matang + data.mengkal + data.mentah + data.abnormal + data.busuk;
         collectionData.push(data);
+        console.log(data);
       });
       setHarvests(collectionData);
     });
@@ -66,6 +67,8 @@ export default function AdminHome() {
         no: index + 1,
         nama: harvest.nama,
         absen: harvest.absen,
+        divisi: harvest.divisi,
+        nama_krani: harvest.nama_krani,
         tanggal: date,
         matang: harvest.matang,
         mengkal: harvest.mengkal,
