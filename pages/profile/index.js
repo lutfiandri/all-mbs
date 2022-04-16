@@ -19,6 +19,7 @@ import { setUserInactive } from '../../redux/slices/user';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
 
 function TitleDesc({ title, desc }) {
   return (
@@ -68,6 +69,9 @@ export default function Profile() {
 
   return (
     <>
+      <Head>
+        <title>Profile | All MBS</title>
+      </Head>
       <VStack w="100%" h="100vh" spacing={0}>
         <AppBar1 title="Profile" />
         <Box w="100%" flex={1} overflowY="auto">

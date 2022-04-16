@@ -6,6 +6,7 @@ import { AppBar2 } from '../../components/AppBar';
 import { CustomTextInput } from '../../components/Input';
 import useActiveUser from '../../hooks/useActiveUser';
 import { getAuth, updateProfile } from 'firebase/auth';
+import Head from 'next/head';
 
 export default function EditProfile() {
   useActiveUser();
@@ -51,32 +52,37 @@ export default function EditProfile() {
 
   const router = useRouter();
   return (
-    <VStack w="100%" h="100vh" spacing={0}>
-      <AppBar2
-        title="Edit Profile"
-        onBack={() => {
-          router.back();
-        }}
-      />
+    <>
+      <Head>
+        <title>Edit Profile | All MBS</title>
+      </Head>
+      <VStack w="100%" h="100vh" spacing={0}>
+        <AppBar2
+          title="Edit Profile"
+          onBack={() => {
+            router.back();
+          }}
+        />
 
-      <Box w="100%" flex={1} overflowY="auto">
-        <Container py={6} flex={1}>
-          <CustomTextInput
-            name="nama"
-            data={nama}
-            setData={setNama}
-            placeholder="Nama Krani"
-          />
-          <Button
-            colorScheme="blue"
-            w="100%"
-            onClick={submitHandler}
-            isDisabled={loading}
-          >
-            Submit
-          </Button>
-        </Container>
-      </Box>
-    </VStack>
+        <Box w="100%" flex={1} overflowY="auto">
+          <Container py={6} flex={1}>
+            <CustomTextInput
+              name="nama"
+              data={nama}
+              setData={setNama}
+              placeholder="Nama Krani"
+            />
+            <Button
+              colorScheme="blue"
+              w="100%"
+              onClick={submitHandler}
+              isDisabled={loading}
+            >
+              Submit
+            </Button>
+          </Container>
+        </Box>
+      </VStack>
+    </>
   );
 }

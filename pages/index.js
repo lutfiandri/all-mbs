@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 import parse from 'url-parse';
 import { QRCodeReader } from '../components/qr/QRCodeReader';
 import useActiveUser from '../hooks/useActiveUser';
+import Head from 'next/head';
 
 export default function Home() {
   useActiveUser();
@@ -39,6 +40,9 @@ export default function Home() {
 
   return (
     <>
+      <Head>
+        <title>Scan QR | All MBS</title>
+      </Head>
       <VStack w="100%" h="100vh" spacing={0}>
         <AppBar1 title="Scan QR Code" />
         <Box w="100%" flex={1} overflowY="auto">

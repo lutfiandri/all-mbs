@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import { addDoc, collection } from 'firebase/firestore';
 import { db } from '../../utils/firebase';
 import { addHarvest } from '../../utils/harvest/addHarvest';
+import Head from 'next/head';
 
 export default function Harvest() {
   useActiveUser();
@@ -81,6 +82,9 @@ export default function Harvest() {
   };
   return (
     <>
+      <Head>
+        <title>Panen | All MBS</title>
+      </Head>
       <VStack w="100%" h="100vh" spacing={0}>
         <AppBar2
           title="Harvest"

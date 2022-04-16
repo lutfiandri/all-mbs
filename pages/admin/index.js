@@ -22,6 +22,7 @@ import { db } from '../../utils/firebase';
 import { convertArrayToCSV } from 'convert-array-to-csv';
 import { CustomDatePicker } from '../../components/CustomDatePicker';
 import useActiveUser from '../../hooks/useActiveUser';
+import Head from 'next/head';
 
 export default function AdminHome() {
   useActiveUser('admin');
@@ -86,33 +87,38 @@ export default function AdminHome() {
   };
 
   return (
-    <HStack maxW="100%" bg="gray.50" spacing={0} color="gray.800">
-      <SideNavBar />
-      <Container
-        maxW="100%"
-        bg="gray.50"
-        minH="100vh"
-        py={8}
-        px={16}
-        overflowX="auto"
-      >
-        <Stack w="100%">
-          <Heading fontSize="4xl" mb={4}>
-            Dashboard
-          </Heading>
-          <HStack>
-            <CustomDatePicker date={startDate} setStartDate={setStartDate} />
-            <Button
-              colorScheme="blue"
-              leftIcon={<HiOutlineDownload />}
-              onClick={downloadCsvHandler}
-            >
-              Download CSV
-            </Button>
-          </HStack>
-          <HistoryTable data={harvests} />
-        </Stack>
-      </Container>
-    </HStack>
+    <>
+      <Head>
+        <title>Dashboard | All MBS</title>
+      </Head>
+      <HStack maxW="100%" bg="gray.50" spacing={0} color="gray.800">
+        <SideNavBar />
+        <Container
+          maxW="100%"
+          bg="gray.50"
+          minH="100vh"
+          py={8}
+          px={16}
+          overflowX="auto"
+        >
+          <Stack w="100%">
+            <Heading fontSize="4xl" mb={4}>
+              Dashboard
+            </Heading>
+            <HStack>
+              <CustomDatePicker date={startDate} setStartDate={setStartDate} />
+              <Button
+                colorScheme="blue"
+                leftIcon={<HiOutlineDownload />}
+                onClick={downloadCsvHandler}
+              >
+                Download CSV
+              </Button>
+            </HStack>
+            <HistoryTable data={harvests} />
+          </Stack>
+        </Container>
+      </HStack>
+    </>
   );
 }
