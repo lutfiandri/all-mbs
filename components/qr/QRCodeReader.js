@@ -2,7 +2,7 @@ import { Box, useMediaQuery } from '@chakra-ui/react';
 import { QrReader } from 'react-qr-reader';
 
 export function QRCodeReader({ setData }) {
-  const [isMobile] = useMediaQuery('(max-width: 800px)');
+  // const [isMobile] = useMediaQuery('(max-width: 800px)');
 
   // https://goqr.me/#
   return (
@@ -19,7 +19,7 @@ export function QRCodeReader({ setData }) {
         videoContainerStyle={{
           width: '100%',
           margin: '0 auto',
-          transform: isMobile ? '' : 'rotateY(180deg)',
+          // transform: isMobile ? '' : 'rotateY(180deg)',
         }}
         videoStyle={{
           height: '100%',
