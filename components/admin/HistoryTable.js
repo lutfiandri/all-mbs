@@ -1,6 +1,6 @@
 import { Table, Tbody, Td, Th, Thead, Tr } from '@chakra-ui/react';
 
-export const HistoryTable = ({ data }) => {
+export const HistoryTable = ({ data, withKrani = true }) => {
   return (
     <Table size="sm" colorScheme="blue">
       <Thead>
@@ -9,7 +9,7 @@ export const HistoryTable = ({ data }) => {
           <Th>Nama Pemanen</Th>
           <Th isNumeric>No Absen</Th>
           <Th isNumeric>Divisi</Th>
-          <Th>Nama Krani</Th>
+          {withKrani && <Th>Nama Krani</Th>}
           <Th isNumeric>Matang</Th>
           <Th isNumeric>Mengkal</Th>
           <Th isNumeric>Mentah</Th>
@@ -27,7 +27,7 @@ export const HistoryTable = ({ data }) => {
               <Td>{row.nama}</Td>
               <Td isNumeric>{row.absen}</Td>
               <Td isNumeric>{row.divisi}</Td>
-              <Td>{row.nama_krani}</Td>
+              {withKrani && <Td>{row.nama_krani}</Td>}
               <Td isNumeric>{row.matang}</Td>
               <Td isNumeric>{row.mengkal}</Td>
               <Td isNumeric>{row.mentah}</Td>

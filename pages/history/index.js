@@ -1,7 +1,6 @@
-import { Container, Box, Center, VStack, Text } from '@chakra-ui/react';
-import { AppBar1, AppBar2 } from '../../components/AppBar';
+import { Container, Box, VStack, Button, Spacer, Flex } from '@chakra-ui/react';
+import { AppBar1 } from '../../components/AppBar';
 import { BottomNavBar } from '../../components/BottomNavBar';
-import { HistoryItem } from '../../components/history/HistoryItem';
 import useActiveUser from '../../hooks/useActiveUser';
 import {
   collection,
@@ -13,31 +12,29 @@ import {
 import { db } from '../../utils/firebase';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { HistoryTable } from '../../components/admin/HistoryTable';
+import { HiOutlineDownload } from 'react-icons/hi';
+import { CustomDatePicker } from '../../components/CustomDatePicker';
+import { downloadCsv } from '../../utils/history/downloadCsv';
 
 export default function History() {
   useActiveUser();
 
   const [harvests, setHarvests] = useState([]);
-  const [dateString, setDateString] = useState('');
   const krani_uid = useSelector((state) => state.user.uid);
+  const [startDate, setStartDate] = useState(new Date());
 
   useEffect(() => {
-    const now = new Date();
-    const date = new Intl.DateTimeFormat('id-ID', {
-      dateStyle: 'full',
-    }).format(now);
-    setDateString(date);
-  }, []);
-
-  useEffect(() => {
-    const now = new Date();
-    now.setHours(0, 0, 0, 0);
-    const midnight = new Date(now);
+    startDate.setHours(0, 0, 0);
+    const midnight = new Date(startDate);
+    startDate.setHours(23, 59, 59);
+    const nextMidnight = new Date(startDate);
 
     const q = query(
       collection(db, 'harvests'),
       where('krani_uid', '==', krani_uid),
       where('created_at', '>=', midnight),
+      where('created_at', '<=', nextMidnight),
       orderBy('created_at', 'desc')
     );
 
@@ -45,41 +42,37 @@ export default function History() {
       const collectionData = [];
       querySnapshot.forEach((doc) => {
         const data = doc.data();
-        collectionData.push({
-          id: doc.id,
-          nama: data.nama,
-          jumlah:
-            data.matang +
-            data.mengkal +
-            data.mentah +
-            data.abnormal +
-            data.busuk,
-        });
+        data.id = doc.id;
+        data.jumlah =
+          data.matang + data.mengkal + data.mentah + data.abnormal + data.busuk;
+        collectionData.push(data);
       });
       setHarvests(collectionData);
     });
 
     return unsubscribe;
-  }, [krani_uid]);
+  }, [startDate, krani_uid]);
 
   return (
     <>
       <VStack w="100%" h="100vh" spacing={0}>
         <AppBar1 title="History" />
         <Box w="100%" flex={1} overflowY="auto">
-          <Container py={4}>
-            <Box mb={2}>
-              <Text fontWeight="bold">{dateString}</Text>
-            </Box>
-            <VStack>
-              {harvests.map((harvest) => (
-                <HistoryItem
-                  key={harvest.id}
-                  harvester={harvest.nama}
-                  fruitsCount={harvest.jumlah}
-                />
-              ))}
-            </VStack>
+          <Container py={4} h="full">
+            <Flex alignItems="start" direction="column" h="full" gap={4}>
+              <CustomDatePicker date={startDate} setStartDate={setStartDate} />
+              <HistoryTable data={harvests} withKrani={false} />
+              <Spacer />
+              <Button
+                // w="full"
+                size="sm"
+                colorScheme="blue"
+                leftIcon={<HiOutlineDownload />}
+                onClick={() => downloadCsv(harvests)}
+              >
+                Download CSV
+              </Button>
+            </Flex>
           </Container>
         </Box>
         <BottomNavBar />
