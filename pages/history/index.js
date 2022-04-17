@@ -65,7 +65,7 @@ export default function History() {
                 <HistoryTable data={harvests} withKrani={false} />
               </Box>
               {/* <Spacer /> */}
-              <Button
+              {/* <Button
                 // w="full"
                 size="sm"
                 colorScheme="blue"
@@ -73,7 +73,7 @@ export default function History() {
                 onClick={() => downloadCsv(harvests)}
               >
                 Download CSV
-              </Button>
+              </Button> */}
             </Flex>
           </Container>
         </Box>
