@@ -61,8 +61,10 @@ export default function History() {
           <Container py={4} h="full">
             <Flex alignItems="start" direction="column" h="full" gap={4}>
               <CustomDatePicker date={startDate} setStartDate={setStartDate} />
-              <HistoryTable data={harvests} withKrani={false} />
-              <Spacer />
+              <Box overflowX="auto" w="full" flex={1}>
+                <HistoryTable data={harvests} withKrani={false} />
+              </Box>
+              {/* <Spacer /> */}
               <Button
                 // w="full"
                 size="sm"
