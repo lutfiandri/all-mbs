@@ -1,9 +1,12 @@
 import {
   Box,
   Button,
+  Center,
   Container,
+  Divider,
   Heading,
   HStack,
+  Select,
   Stack,
 } from '@chakra-ui/react';
 import { SideNavBar } from '../../components/admin/side/SideNavBar';
@@ -26,6 +29,8 @@ import { downloadCsv } from '../../utils/history/downloadCsv';
 
 export default function AdminHome() {
   useActiveUser('admin');
+
+  const [region, setRegion] = useState('id-ID');
 
   const [harvests, setHarvests] = useState([]);
   const [startDate, setStartDate] = useState(new Date());
@@ -79,10 +84,24 @@ export default function AdminHome() {
             </Heading>
             <HStack>
               <CustomDatePicker date={startDate} setStartDate={setStartDate} />
+              <Center height="50px">
+                <Divider orientation="vertical" colorScheme="blue" />
+              </Center>
+              <Select
+                // placeholder="CSV Format"
+                w="fit-content"
+                bg="white"
+                borderColor="gray.300"
+                value={region}
+                onChange={(e) => setRegion(e.target.value)}
+              >
+                <option value="id-ID">id-ID</option>
+                <option value="en-US">en-US</option>
+              </Select>
               <Button
                 colorScheme="blue"
                 leftIcon={<HiOutlineDownload />}
-                onClick={() => downloadCsv(harvests)}
+                onClick={() => downloadCsv(harvests, region)}
               >
                 Download CSV
               </Button>

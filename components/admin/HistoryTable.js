@@ -34,7 +34,7 @@ export const HistoryTable = ({ data, withKrani = true }) => {
               <Td isNumeric>{row.abnormal}</Td>
               <Td isNumeric>{row.busuk}</Td>
               <Td isNumeric>{row.jumlah}</Td>
-              <Td isNumeric>{row.brondolan}</Td>
+              <Td isNumeric>{row.brondolan.toFixed(2)}</Td>
             </Tr>
           );
         })}
