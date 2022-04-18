@@ -1,8 +1,17 @@
 import { convertArrayToCSV } from 'convert-array-to-csv';
 
-export const downloadCsv = (harvests) => {
+export const downloadCsv = (harvests, region = 'id-ID') => {
+  /**
+   * region 'id-ID' | 'en-US'
+   */
+
+  const listDelimiter = {
+    'id-ID': ';',
+    'en-US': ',',
+  };
+
   const now = new Date();
-  const date = new Intl.DateTimeFormat('id-ID').format(now);
+  const date = new Intl.DateTimeFormat(region).format(now);
   const data = harvests.map((harvest, index) => {
     return {
       no: index + 1,
@@ -11,16 +20,18 @@ export const downloadCsv = (harvests) => {
       divisi: harvest.divisi,
       nama_krani: harvest.nama_krani,
       tanggal: date,
-      matang: harvest.matang,
-      mengkal: harvest.mengkal,
-      mentah: harvest.mentah,
-      abnormal: harvest.abnormal,
-      busuk: harvest.busuk,
-      jumlah: harvest.jumlah,
-      brondolan: harvest.brondolan,
+      matang: new Intl.NumberFormat(region).format(harvest.matang),
+      mengkal: new Intl.NumberFormat(region).format(harvest.mengkal),
+      mentah: new Intl.NumberFormat(region).format(harvest.mentah),
+      abnormal: new Intl.NumberFormat(region).format(harvest.abnormal),
+      busuk: new Intl.NumberFormat(region).format(harvest.busuk),
+      jumlah: new Intl.NumberFormat(region).format(harvest.jumlah),
+      brondolan: new Intl.NumberFormat(region).format(harvest.brondolan),
     };
   });
-  const csvData = 'data:text/csv;charset=utf-8,' + convertArrayToCSV(data);
+  const csvData =
+    'data:text/csv;charset=utf-8,' +
+    convertArrayToCSV(data, { separator: listDelimiter[region] || ',' });
 
   const encodedUri = encodeURI(csvData);
   const link = document.createElement('a');
