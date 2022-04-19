@@ -26,6 +26,7 @@ export default function Harvest() {
   const [mentah, setMentah] = useState(0);
   const [abnormal, setAbnormal] = useState(0);
   const [busuk, setBusuk] = useState(0);
+  const [tangkai, setTangkai] = useState(0);
   const [brondolan, setBrondolan] = useState(0);
   const [loading, setLoading] = useState(false);
 
@@ -49,6 +50,7 @@ export default function Harvest() {
       mentah: Number(mentah),
       abnormal: Number(abnormal),
       busuk: Number(busuk),
+      tangkai: Number(tangkai),
       brondolan: Number(brondolan),
       krani_uid: krani.uid,
       nama_krani: krani.name,
@@ -143,6 +145,12 @@ export default function Harvest() {
               data={busuk}
               setData={setBusuk}
               placeholder="Buah Busuk"
+            />
+            <CustomNumberInput
+              name="tangkai"
+              data={tangkai}
+              setData={setTangkai}
+              placeholder="tangkai Panjang"
             />
             <CustomNumberInput
               name="brondolan"

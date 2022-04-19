@@ -15,6 +15,7 @@ export const HistoryTable = ({ data, withKrani = true }) => {
           <Th isNumeric>Mentah</Th>
           <Th isNumeric>Abnormal</Th>
           <Th isNumeric>Busuk</Th>
+          <Th isNumeric>Tangkai Panjang</Th>
           <Th isNumeric>Jumlah</Th>
           <Th isNumeric>Brondolan (Kg)</Th>
         </Tr>
@@ -33,6 +34,7 @@ export const HistoryTable = ({ data, withKrani = true }) => {
               <Td isNumeric>{row.mentah}</Td>
               <Td isNumeric>{row.abnormal}</Td>
               <Td isNumeric>{row.busuk}</Td>
+              <Td isNumeric>{row.tangkai}</Td>
               <Td isNumeric>{row.jumlah}</Td>
               <Td isNumeric>{row.brondolan.toFixed(2)}</Td>
             </Tr>
