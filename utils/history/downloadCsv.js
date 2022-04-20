@@ -23,7 +23,7 @@ export const downloadCsv = (harvests, region = 'id-ID') => {
       matang: new Intl.NumberFormat(region).format(harvest.matang),
       mengkal: new Intl.NumberFormat(region).format(harvest.mengkal),
       mentah: new Intl.NumberFormat(region).format(harvest.mentah),
-      abnormal: new Intl.NumberFormat(region).format(harvest.abnormal),
+      overripe: new Intl.NumberFormat(region).format(harvest.overripe),
       busuk: new Intl.NumberFormat(region).format(harvest.busuk),
       tangkai_panjang: new Intl.NumberFormat(region).format(harvest.tangkai),
       jumlah: new Intl.NumberFormat(region).format(harvest.jumlah),

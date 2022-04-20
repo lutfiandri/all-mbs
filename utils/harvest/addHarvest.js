@@ -69,7 +69,7 @@ const updateHarvest = async (harvest, initialHarvest) => {
       matang: h.matang + i.matang,
       mengkal: h.mengkal + i.mengkal,
       mentah: h.mentah + i.mentah,
-      abnormal: h.abnormal + i.abnormal,
+      overripe: h.overripe + i.overripe,
       busuk: h.busuk + i.busuk,
       brondolan: h.brondolan + i.brondolan,
       updated_at: new Date(),

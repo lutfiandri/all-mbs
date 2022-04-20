@@ -54,7 +54,7 @@ export default function AdminHome() {
         const data = doc.data();
         data.id = doc.id;
         data.jumlah =
-          data.matang + data.mengkal + data.mentah + data.abnormal + data.busuk;
+          data.matang + data.mengkal + data.mentah + data.overripe + data.busuk;
         collectionData.push(data);
       });
       setHarvests(collectionData);
