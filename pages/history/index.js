@@ -44,7 +44,11 @@ export default function History() {
         const data = doc.data();
         data.id = doc.id;
         data.jumlah =
-          data.matang + data.mengkal + data.mentah + data.overripe + data.busuk;
+          data.matang +
+          data.mengkal +
+          data.mentah +
+          data.lewat_matang +
+          data.busuk;
         collectionData.push(data);
       });
       setHarvests(collectionData);

@@ -24,7 +24,7 @@ export default function Harvest() {
   const [matang, setMatang] = useState(0);
   const [mengkal, setMengkal] = useState(0);
   const [mentah, setMentah] = useState(0);
-  const [overripe, setOverripe] = useState(0);
+  const [lewat_matang, setLewat_matang] = useState(0);
   const [busuk, setBusuk] = useState(0);
   const [tangkai, setTangkai] = useState(0);
   const [brondolan, setBrondolan] = useState(0);
@@ -48,7 +48,7 @@ export default function Harvest() {
       matang: Number(matang),
       mengkal: Number(mengkal),
       mentah: Number(mentah),
-      overripe: Number(overripe),
+      lewat_matang: Number(lewat_matang),
       busuk: Number(busuk),
       tangkai: Number(tangkai),
       brondolan: Number(brondolan),
@@ -135,10 +135,10 @@ export default function Harvest() {
               placeholder="Buah Mentah"
             />
             <CustomNumberInput
-              name="overripe"
-              data={overripe}
-              setData={setOverripe}
-              placeholder="Buah Over Ripe"
+              name="lewat_matang"
+              data={lewat_matang}
+              setData={setLewat_matang}
+              placeholder="Buah Lewat Matang"
             />
             <CustomNumberInput
               name="busuk"
@@ -150,7 +150,7 @@ export default function Harvest() {
               name="tangkai"
               data={tangkai}
               setData={setTangkai}
-              placeholder="tangkai Panjang"
+              placeholder="Tangkai Panjang"
             />
             <CustomNumberInput
               name="brondolan"
