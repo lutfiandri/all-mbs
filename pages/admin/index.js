@@ -26,6 +26,7 @@ import { CustomDatePicker } from '../../components/CustomDatePicker';
 import useActiveUser from '../../hooks/useActiveUser';
 import Head from 'next/head';
 import { downloadCsv } from '../../utils/history/downloadCsv';
+import axios from 'axios';
 
 export default function AdminHome() {
   useActiveUser('admin');
@@ -66,6 +67,21 @@ export default function AdminHome() {
 
     return unsubscribe;
   }, [startDate]);
+
+  const downloadCsvMonthHandler = async () => {
+    try {
+      const result = await axios({
+        method: 'GET',
+        url: '/api/harvests/month',
+      });
+      if (result.status !== 200) throw result;
+
+      const harvests = result.data.data;
+      downloadCsv(harvests, region);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <>
@@ -108,6 +124,13 @@ export default function AdminHome() {
                 onClick={() => downloadCsv(harvests, region)}
               >
                 Download CSV
+              </Button>
+              <Button
+                colorScheme="blue"
+                leftIcon={<HiOutlineDownload />}
+                onClick={downloadCsvMonthHandler}
+              >
+                Download CSV (Month)
               </Button>
             </HStack>
             <HistoryTable data={harvests} />
