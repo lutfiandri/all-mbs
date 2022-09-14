@@ -5,7 +5,8 @@ export default async function handler(req, res) {
     res.status(405);
   }
   try {
-    const startMonth = new Date();
+    const { year, month } = req.query;
+    const startMonth = new Date(Number(year), Number(month));
     startMonth.setDate(1);
     startMonth.setHours(0);
     startMonth.setMinutes(0);

@@ -69,11 +69,14 @@ export default function AdminHome() {
   }, [startDate]);
 
   const downloadCsvMonthHandler = async () => {
+    const url = `/api/harvests/month?year=${startDate.getFullYear()}&month=${startDate.getMonth()}`;
+
     try {
       const result = await axios({
         method: 'GET',
-        url: '/api/harvests/month',
+        url: url,
       });
+
       if (result.status !== 200) throw result;
 
       const harvests = result.data.data;
